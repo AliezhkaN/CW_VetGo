@@ -1,0 +1,124 @@
+
+.profile__container{
+    min-height: 70vh;
+    display: flex;
+    justify-content: center;
+
+}
+
+.profile__info-container{
+    height: 100%;
+    min-width: 70%;
+}
+
+.profile__title{
+    min-height: 5vh;
+    border-bottom: 2px solid #282727;
+    display: flex;
+    align-items: center;
+    font-size: 22px;
+    font-weight: 500;
+}
+
+.profile__email{
+    min-height: 5vh;
+    display: flex;
+    flex-direction: row;
+    border-bottom: 2px solid ;
+}
+
+.name__name{
+    font-size: 20px;
+    font-weight: 500;
+    display: flex;
+    align-items:center;
+    min-width: 30%;
+    max-height: 5vh;
+}
+
+.name__name p{
+    font-weight: 400;
+    font-size: 18px;
+}
+
+.name__value{
+    flex: 1 1 auto;
+    display: flex;
+    align-items:center;
+}
+
+.name__value__edit{
+    margin-top: 1.5vh;
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.name__value span{
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.name__edit{
+    flex: 0 0 50px;
+    font-size: 20px;
+    font-weight: 500;
+    display: flex;
+    align-items:center;
+}
+
+.name__edit a{
+    cursor: pointer;
+}
+
+.name__edit a:hover{
+    color: #f57c84;
+}
+
+
+
+
+
+
+.name__value__edit label{
+    margin-top: 1vh;
+    font-family: Rubik;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+
+
+
+.buttons_container{
+    display: flex;
+    justify-content: center;
+    min-height: 7vh;
+    max-width:70%;
+}
+
+.cancel_button{
+    background-color:burlywood!important;
+}
+
+.error__message__wrapper{
+    max-width:70%;
+    min-height: 5vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Rubik;
+    font-size: 18px;
+    font-weight: 500;
+    color: #EC5863;
+}
+
+
+
+.margin-t-3{
+    margin-top: 3vh;
+}
+
+.margin-bottom-5{
+    margin-bottom: 5vh;
+}

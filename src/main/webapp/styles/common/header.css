@@ -1,0 +1,36 @@
+.header__container{
+    display: flex;
+    min-height: 100px;
+    align-items: center;
+}
+
+.header__menu{
+    flex: 1 1 auto;
+}
+.header__button{
+    flex: 0 0 200px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.menu{
+    display: flex;
+    justify-content: flex-end;
+}
+.menu__list{
+    display: flex;
+    gap: 40px;
+}
+.menu__link{
+    font-family: Raleway;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 1.2;
+    color:#000;
+    letter-spacing: 1px;
+}
+
+.menu__link:hover{
+    color:#f57c84;
+}

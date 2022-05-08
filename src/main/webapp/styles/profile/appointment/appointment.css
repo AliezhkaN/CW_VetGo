@@ -1,0 +1,267 @@
+.appointment{
+    min-height: 70vh;
+    display: flex;
+    justify-content: center;
+}
+
+.appointment__container{
+    min-height: 70vh;
+    width: 100%;
+    background-image: url("./images/bg.jpg");
+    filter: drop-shadow(2px 4px 4px rgba(17, 2, 2, 0.75));
+}
+
+.flex-column{
+    display: flex;
+    flex-direction: column;
+}
+
+.flex-row{
+    display: flex;
+    flex-direction: row;
+}
+
+.image-container{
+    max-height: 40vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+    background-color: #6C7A89;
+}
+
+.image__wrapper{
+    width: 105%;
+    min-height: 20vh;
+}
+
+.image-container img{
+    width: 100%;
+    height: 100%;
+    transform-origin: 50% 65%;
+    transition: transform 2s, filter 3s ease-in-out;
+    filter: brightness(130%);
+}
+
+.image__wrapper:hover img{
+    filter: brightness(100%);
+    transform: scale(1.5);
+}
+
+.text-container{
+    min-height: 15vh;
+    width: 100%;
+    font-family: Rubik;
+    display: flex;
+    justify-content: center;
+    align-items:center;
+    flex-direction: column;
+    font-size: 30px;
+}
+
+.btn-container{
+    flex: 1 1 auto;
+    display: flex;
+    justify-content: center;
+    align-items:center;
+}
+
+.second-button{
+    background-color:burlywood!important;
+    margin-left: 2vh;
+}
+
+.input{
+    min-width: 100% !important;
+}
+
+.login__modal__message__wrapper{
+    min-height: 5vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    font-weight: 500;
+    color: #EC5863;
+}
+
+.login__wrapper label{
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.mh-7{
+    min-height: 7vh!important;
+    font-size: 16px;
+}
+
+.pet-container{
+    height: 100%;
+    max-width: 45%;
+    background-color: #EC5863;
+}
+
+.img-container{
+    height: 100%;
+    min-width: 30vh;
+    overflow: hidden;
+}
+
+.img-container img{
+    width: 100% !important;
+    height: 100% !important;
+    transform-origin: 0 100%;
+    transition: transform 2s, filter 3s ease-in-out;
+    filter: brightness(105%);
+}
+
+.img-container:hover img{
+    filter: brightness(100%);
+    transform: scale(1.5);
+    transform: scale(1.5) translateY(30%);
+}
+
+.title{
+    height: 10%;
+    font-family: Rubik;
+    font-size: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.inf-container{
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.clock-container{
+    height: 30%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.timer{
+    height: 15vh;
+    width:90%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.card{
+    width: 15vh;
+    height: 15vh;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    box-shadow:0 4px 20px rgba(0,0,0,.25);
+}
+
+.timer-title{
+    height: 10%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Rubik;
+    font-size: 20px;
+    font-weight: 300;
+}
+
+.number{
+    height: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 60px;
+}
+
+.vv{
+    flex: 1 1 auto;
+    text-align: center;
+    font-size: 22px;
+}
+
+.pet-info{
+    flex: 1 1 auto;
+    justify-content: center;
+    display: flex;
+
+}
+
+.t-container{
+    margin-top: 5vh;
+    width: 50%;
+}
+
+.pet-info li {
+    border-radius: 3px;
+    padding: 25px 30px;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 25px;
+}
+.table-header {
+    background-color: #EC5863;
+    font-size: 14px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    color: white;
+}
+.table-row {
+    background-color: #ffffff;
+    font-weight: 500;
+    box-shadow: 0px 0px 9px 0px rgba(0,0,0,0.1);
+}
+.col-1 {
+
+    flex-basis: 65%;
+}
+.col-2 {
+    flex-basis: 35%;
+}
+
+
+[class*="col"]{
+    display: flex;
+    align-items: center;
+}
+
+.cancel-button-container{
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@media all and (max-width: 767px) {
+    .table-header {
+        display: none;
+    }
+    .table-row{
+
+    }
+    li {
+        display: block;
+    }
+    .col {
+        flex-basis: 100%;
+    }
+    .col {
+        display: flex;
+        padding: 10px 0;
+    }
+    .col :before {
+        color: #6C7A89;
+        padding-right: 10px;
+        content: attr(data-label);
+        flex-basis: 50%;
+        text-align: right;
+    }
+}
+

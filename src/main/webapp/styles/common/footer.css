@@ -1,0 +1,19 @@
+.footer-container {
+
+    font-weight: 500;
+    font-family: Rubik;
+    --bs-bg-opacity: 1;
+    background-color: #f57c84;
+    justify-content: center;
+    text-align: center;
+    min-height: 12vh;
+    position: sticky;
+}
+
+.footer-container a {
+    text-decoration: none;
+}
+
+.social-links {
+    padding-top: 3vh;
+}

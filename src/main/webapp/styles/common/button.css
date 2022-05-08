@@ -1,0 +1,21 @@
+.button{
+    font-family: Raleway;
+    font-weight: 800;
+    font-size: 14px;
+    line-height: 1.2;
+    letter-spacing: 0.14rem;
+    color:white;
+    padding: 15px 30px;
+    background-color: #EC5863;
+    border-radius: 10px;
+    transition: background-color 0.3s ease 0s;
+    border:none;
+    cursor: pointer;
+}
+
+.button:hover{
+    background-color: #f57c84;
+    transform: translateY(-5px);
+    transition: 0.4s ease-out;
+}
+
