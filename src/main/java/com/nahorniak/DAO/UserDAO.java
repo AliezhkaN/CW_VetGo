@@ -18,6 +18,9 @@ public class UserDAO {
     private static String GET_USER_BY_EMAIl = "SELECT u.id, email, password, first_name, last_name, phone,is_blocked, r.role " +
             "FROM users u JOIN roles r ON r.id = u.role_id WHERE email=?";
 
+    private static String GET_USER_BY_ID = "SELECT u.id, email, password, first_name, last_name, phone,is_blocked, r.role " +
+            "FROM users u JOIN roles r ON r.id = u.role_id WHERE u.id=?";
+
     private static String GET_ALL = "SELECT u.id, email, password, first_name, last_name, phone,is_blocked, r.role " +
             "FROM users u JOIN roles r ON r.id = u.role_id WHERE r.role = 'CUSTOMER'";
 
@@ -27,6 +30,9 @@ public class UserDAO {
 
     private static String INSERT_USER = "INSERT INTO users(email, password, first_name, last_name, phone) " +
             "VALUES (?,?,?,?,?)";
+
+    private static final String GET_ALL_DOCTORS = "SELECT u.id, email, first_name, last_name, phone " +
+            "FROM users u JOIN roles r ON r.id = u.role_id WHERE r.role = 'DOCTOR'";
 
     private static UserDAO userDAO;
 
@@ -100,6 +106,46 @@ public class UserDAO {
         return users;
     }
 
+
+    public User getDoctorById(int doctorId,Connection connection) throws SQLException {
+        try (PreparedStatement ps = connection.prepareStatement(GET_USER_BY_ID)) {
+            ps.setInt(1, doctorId);
+            ResultSet rs = ps.executeQuery();
+            User user = null;
+            if (rs.next()) {
+                UserMapper userMapper = new UserMapper();
+                user = userMapper.map(rs);
+            }
+            ConnectionPool.close(rs);
+            return user;
+        } catch (SQLException e) {
+            ConnectionPool.rollback(connection);
+            e.printStackTrace();
+            throw e;
+        } finally {
+            ConnectionPool.commit(connection);
+        }
+    }
+
+    public List<User> getAllDoctors(Connection connection) throws SQLException {
+        List<User> users = new ArrayList<>();
+        try (Statement statement = connection.createStatement()) {
+            ResultSet rs = statement.executeQuery(GET_ALL_DOCTORS);
+            UserMapper userMapper = new UserMapper();
+            while (rs.next()) {
+                User person = userMapper.doctorMap(rs);
+                users.add(person);
+            }
+            ConnectionPool.close(rs);
+        } catch (SQLException e) {
+            ConnectionPool.rollback(connection);
+            throw e;
+        } finally {
+            ConnectionPool.commit(connection);
+        }
+        return users;
+    }
+
     public void updateUser(User user, Connection connection) throws SQLException {
         try (PreparedStatement ps = connection.prepareStatement(UPDATE_USER)){
             ps.setString(1,user.getEmail());
@@ -152,6 +198,22 @@ public class UserDAO {
                         .withEmail(rs.getString(USER__EMAIL))
                         .withPhoneNumber(rs.getString(USER__PHONE_NUMBER))
                         .withStatus(rs.getBoolean(USER__IS__BLOCKED))
+                        .build();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            return person;
+        }
+
+        public User doctorMap(ResultSet rs){
+            User.Builder builder = new User.Builder();
+            User person = null;
+            try {
+                person = builder.withId(rs.getInt(ENTITY__ID))
+                        .withFirstName(rs.getString(USER__FIRST_NAME))
+                        .withLastName(rs.getString(USER__LAST_NAME))
+                        .withEmail(rs.getString(USER__EMAIL))
+                        .withPhoneNumber(rs.getString(USER__PHONE_NUMBER))
                         .build();
             } catch (SQLException e) {
                 e.printStackTrace();

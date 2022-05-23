@@ -58,7 +58,7 @@ public class LoginServlet extends HttpServlet {
 
     private void moveToPage(HttpServletRequest req, HttpServletResponse resp, Role role) throws ServletException, IOException {
         HttpSession session = req.getSession();
-        if (role == Role.CUSTOMER || role == Role.ADMIN) {
+        if (role == Role.CUSTOMER || role == Role.ADMIN || role == Role.DOCTOR) {
             resp.sendRedirect("profile");
         } else if (role == Role.UNKNOWN) {
             session.setAttribute("errorMessage","login or password is not correct");

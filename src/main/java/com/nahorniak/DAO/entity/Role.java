@@ -1,7 +1,7 @@
 package com.nahorniak.DAO.entity;
 
 public enum Role {
-    CUSTOMER("CUSTOMER"), ADMIN("ADMIN"), UNKNOWN("UNKNOWN");
+    CUSTOMER("CUSTOMER"), ADMIN("ADMIN"),DOCTOR("DOCTOR"), UNKNOWN("UNKNOWN");
 
     private String value;
 

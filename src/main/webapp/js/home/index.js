@@ -1,5 +1,5 @@
 window.addEventListener('DOMContentLoaded', ()=>{
-    smoothScroll('.wrapper',500);
+
 
 
     //tabs
@@ -68,12 +68,12 @@ window.addEventListener('DOMContentLoaded', ()=>{
 
     const stickyArrow = document.querySelector('.stickyArrow')
 
-    document.querySelector('#about').addEventListener('click', (event)=>{
+    document.querySelector('#about-li').addEventListener('click', (event)=>{
         event.preventDefault();
         smoothScroll('.about',1000);
     });
 
-    document.querySelector('#services').addEventListener('click', (event)=>{
+    document.querySelector('#services-li').addEventListener('click', (event)=>{
         event.preventDefault();
         smoothScroll('.services',1000);
     });

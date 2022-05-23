@@ -1,0 +1,68 @@
+@import url('https://fonts.googleapis.com/css2?family=Akshar:wght@300;400;500&display=swap');
+
+
+.doctors{
+    height: 70vh;
+}
+
+.doctor__container{
+    height: 70vh;
+    display: flex;
+    flex-direction: row;
+}
+
+.image-container{
+    margin: 4vh 0;
+    width: 50%;
+    overflow: hidden;
+    box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+
+    border-radius: 12px;
+}
+
+.image-container img{
+    height: 100%;
+    width: 100%;
+    transform-origin: 50% 65%;
+    transition: transform 2s, filter 3s ease-in-out;
+    filter: brightness(100%);
+}
+
+.image-container:hover img{
+    filter: brightness(100%);
+    transform: scale(1.2);
+}
+
+.text-container{
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    font-family: 'Akshar';
+    width: 50%;
+}
+
+.title{
+    height: 10vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 38px;
+}
+
+.info-container{
+
+    flex: 1 1 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.info{
+    height: 40vh;
+    width: 70%;
+    font-size: 28px;
+    text-align: justify;
+    word-break: break-word;
+    font-weight: 400;
+}

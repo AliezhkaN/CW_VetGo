@@ -20,6 +20,7 @@
     <link rel="icon" type="image/x-icon" href="./images/logo.png">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://unpkg.com/jquery-input-mask-phone-number@1.0.15/dist/jquery-input-mask-phone-number.js"></script>
+    <script async src="https://www.google.com/recaptcha/api.js"></script>
 </head>
 <body>
 <div class="wrapper">
@@ -34,8 +35,8 @@
             <nav class="header__menu menu">
                 <ul class="menu__list">
                     <li class="menu__item"><a href="" class="menu__link">HOME</a></li>
-                    <li id="about" class="menu__item"><a href="" class="menu__link">ABOUT</a></li>
-                    <li id="services" class="menu__item"><a href="" class="menu__link">SERVICES</a></li>
+                    <li id="about-li" class="menu__item"><a href="" class="menu__link">ABOUT</a></li>
+                    <li id="services-li" class="menu__item"><a href="" class="menu__link">SERVICES</a></li>
                     <li id="contactUs"class="menu__item"><a href="" class="menu__link">CONTACT US</a></li>
                     <c:if test="${user!=null}">
                         <li id="contactUs"class="menu__item"><a href="profile" class="menu__link">PROFILE</a></li>
@@ -84,22 +85,22 @@
                 </div>
             </div>
         </section>
-        <section class="about">
+        <section class="about" id="about">
             <div class="about__container">
                 <div class="about_content-container">
                     <div class="tabcontent doctors">
                         <div class="doctor-container">
-                            <div class="doctor-image">
+                            <a href="jane.jsp" class="doctor-image">
                                 <img src="images/doctor.jpg" alt="jane">
-                            </div>
+                            </a>
                             <div class="doctor-name">
                                 <p>Jane Dou</p>
                             </div>
                         </div>
                         <div class="doctor-container">
-                            <div class="doctor-image">
+                            <a href="john.jsp" class="doctor-image">
                                 <img src="images/doctor1.jpg" alt="jane">
-                            </div>
+                            </a>
                             <div class="doctor-name">
                                 <p>John Dou</p>
                             </div>
@@ -196,7 +197,7 @@
                 </div>
             </div>
         </section>
-        <section class="services">
+        <section class="services" id="services">
             <div class="services__container">
                 <div class="s-container">
                     <div class="__title">
@@ -209,39 +210,39 @@
                             <!-- Slides -->
 
 
-                            <div class="swiper-slide">
+                            <a href="animal-dental-care.jsp" class="swiper-slide">
                                 <div class="service-image">
                                     <img src="images/services02.jpg" alt="">
                                 </div>
                                 <div class="service_text">
                                     <p>Animal Dental Care</p>
                                 </div>
-                            </div>
-                            <div class="swiper-slide">
+                            </a>
+                            <a href="microchipping.jsp" class="swiper-slide">
                                 <div class="service-image">
                                     <img src="images/services01.jpg" alt="">
                                 </div>
                                 <div class="service_text">
                                     <p>Microchipping</p>
                                 </div>
-                            </div>
-                            <div class="swiper-slide">
+                            </a>
+                            <a href="surgeries.jsp" class="swiper-slide">
                                 <div class="service-image">
                                     <img src="images/services03.jpg" alt="">
                                 </div>
                                 <div class="service_text">
                                     <p>Surgeries</p>
                                 </div>
-                            </div>
+                            </a>
 
-                            <div class="swiper-slide">
+                            <a href="senior-pet-care.jsp" class="swiper-slide">
                                 <div class="service-image">
                                     <img src="images/services04.jpg" alt="">
                                 </div>
                                 <div class="service_text">
                                     <p>Senior Pet Care</p>
                                 </div>
-                            </div>
+                            </a>
                         </div>
                         <!-- If we need pagination -->
                         <div class="swiper-pagination"></div>
@@ -333,7 +334,7 @@
                                     <div id="c-email" class="hide">
                                         <label  for="c-email-input">Email</label>
                                     </div>
-                                    <input id="c-email-input" class="input" type="text" placeholder="Email" name="email">
+                                    <input id="c-email-input" class="input" type="email" placeholder="Email" name="email">
                                     <div id="c-message" class="hide">
                                         <label  for="c-message-input">Message</label>
                                     </div>
@@ -466,6 +467,9 @@
                                 <div>
                                     <input autocomplete required placeholder="Password" id="s-password"  name="password" type="password" class="input black">
                                 </div>
+                                <div class="g-recaptcha"
+                                     data-sitekey="6LdK3CAfAAAAADxB5G2f7_6mCqwjJn16qCKJf-T9"></div>
+                                <br>
                             </div>
                             <input type="submit" class="button" value="Sign Up">
                             <c:if test="${signUpError != null}">
@@ -637,5 +641,6 @@
     <% session.removeAttribute("changePasswordError");%>
 </c:if>
 <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
+
 </body>
 </html>

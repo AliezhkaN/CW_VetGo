@@ -19,7 +19,11 @@
         </init-param>
         <init-param>
             <param-name>client</param-name>
-            <param-value>appointment appointmentHistory newAppointment</param-value>
+            <param-value>appointment appointmentHistory newAppointment appointmentUpdate</param-value>
+        </init-param>
+        <init-param>
+            <param-name>doctor</param-name>
+            <param-value>timetable</param-value>
         </init-param>
         <init-param>
             <param-name>common</param-name>

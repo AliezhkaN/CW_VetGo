@@ -4,6 +4,7 @@ import com.nahorniak.DAO.ConnectionPool;
 import com.nahorniak.DAO.UserDAO;
 import com.nahorniak.DAO.entity.User;
 import com.nahorniak.util.Encryption;
+import com.nahorniak.util.reCaptcha.VerifyUtils;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -32,33 +33,37 @@ public class SignUpServlet extends HttpServlet {
         String password =request.getParameter("password");
 
         if(notNull(email,firstName,lastName,phoneNumber,password)){
-            try (Connection connection = connectionPool.getConnection()){
+            String gRecaptchaResponse = request.getParameter("g-recaptcha-response");
+            if (VerifyUtils.verify(gRecaptchaResponse)) {
+                try (Connection connection = connectionPool.getConnection()) {
 
-                String encryptedPassword = Encryption.md5(password);
+                    String encryptedPassword = Encryption.md5(password);
 
-                User.Builder builder = new User.Builder();
-                User user = builder.withEmail(email)
-                        .withFirstName(firstName)
-                        .withLastName(lastName)
-                        .withPhoneNumber(phoneNumber)
-                        .withPassword(encryptedPassword)
-                        .build();
+                    User.Builder builder = new User.Builder();
+                    User user = builder.withEmail(email)
+                            .withFirstName(firstName)
+                            .withLastName(lastName)
+                            .withPhoneNumber(phoneNumber)
+                            .withPassword(encryptedPassword)
+                            .build();
 
-                userDAO.insertUser(user,connection);
-                session.setAttribute("message","Account Successfully signed up!");
-                response.sendRedirect("/application");
-            } catch (SQLException e) {
-                String msg = e.getMessage();
+                    userDAO.insertUser(user, connection);
+                    session.setAttribute("message", "Account Successfully signed up!");
 
-                if(msg.contains("email")){
-                    session.setAttribute("signUpError","User with such email already exist");
-                } else if(msg.contains("phone")){
-                    session.setAttribute("signUpError","User with such phone already exist");
+                } catch (SQLException e) {
+                    String msg = e.getMessage();
+
+                    if (msg.contains("email")) {
+                        session.setAttribute("signUpError", "User with such email already exist");
+                    } else if (msg.contains("phone")) {
+                        session.setAttribute("signUpError", "User with such phone already exist");
+                    }
                 }
-                response.sendRedirect("/application");
-
+            }else {
+                session.setAttribute("signUpError", "Please confirm that you are not a robot");
             }
         }
+        response.sendRedirect("/application");
 
     }
 

@@ -30,6 +30,9 @@
                         <c:when test="${user.getRole().equalsTo('ADMIN')}">
                             <li class="menu__item"><a href="customers" class="menu__link">CUSTOMERS</a></li>
                         </c:when>
+                        <c:when test="${user.getRole().equalsTo('DOCTOR')}">
+                            <li class="menu__item"><a href="timetable" class="menu__link">TIMETABLE</a></li>
+                        </c:when>
                         <c:otherwise>
                             <li class="menu__item"><a href="appointment" class="menu__link">APPOINTMENT</a></li>
                             <li class="menu__item"><a href="appointmentHistory" class="menu__link">APPOINTMENT HISTORY</a></li>
@@ -199,7 +202,7 @@
                     <div class="profile__email margin-bottom-5">
                         <div class="name__name">Phone number</div>
                         <div class="name__value">
-                            <span>+380 67 170 69 78</span>
+                            <span><c:out value="${user.phoneNumber}"/></span>
                         </div>
                     </div>
                 </div>

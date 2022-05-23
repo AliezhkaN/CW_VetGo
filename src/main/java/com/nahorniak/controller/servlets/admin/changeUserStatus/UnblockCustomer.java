@@ -12,13 +12,37 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 
+
+/**
+ * UnblockCustomer -> used for unblocking the appropriate user
+ *
+ * @author Oleh Nahorniak
+ */
+
 @WebServlet(name = "unblockCustomer", value = "/unblockCustomer")
 public class UnblockCustomer extends HttpServlet {
+
+    /**
+     * doGet method - sendRedirect to error-page
+     *
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.sendError(404);
     }
 
+
+    /**
+     * doPost method - unblocks appropriate customer by his id
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ConnectionPool connectionPool = ConnectionPool.getInstance();

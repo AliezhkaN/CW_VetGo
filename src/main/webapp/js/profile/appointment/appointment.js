@@ -69,9 +69,6 @@ window.addEventListener('DOMContentLoaded', ()=>{
     function hideValues(){
         let loginError = document.querySelector('#appointmentError');
         if(loginError != null) loginError.innerHTML ='';
-        kindInput.value = '';
-        nameInput.value = '';
-        datetimeInput.value = '';
         hideElem(kindLabel);
         hideElem(nameLabel);
         hideElem(datetimeLabel);
@@ -136,5 +133,20 @@ window.addEventListener('DOMContentLoaded', ()=>{
 
         setClock('.timer',time);
     }
+
+    const updateButton = document.querySelector('#upd');
+    const newButton = document.querySelector('#nw');
+    const form = document.querySelector('#form');
+    const inputButton = document.querySelector('#i-btn');
+
+    updateButton?.addEventListener('click',()=>{
+        form.action ='appointmentUpdate';
+        inputButton.value = 'Rearrange an Appointment';
+    });
+
+    newButton?.addEventListener('click',()=>{
+        form.action ='newAppointment';
+        inputButton.value = 'Make an Appointment';
+    });
 
 });

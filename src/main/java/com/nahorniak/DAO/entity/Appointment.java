@@ -7,6 +7,7 @@ public class Appointment implements Serializable {
     private static final long serialVersionUID = 4748376300012472146L;
     private int id;
     private int userId;
+    private int doctorId;
     private Status status;
     private String petKind;
     private String petName;
@@ -27,6 +28,11 @@ public class Appointment implements Serializable {
 
         public Appointment.Builder withUserId(int userId) {
             appointment.userId = userId;
+            return this;
+        }
+
+        public Appointment.Builder withDoctorId(int doctorId) {
+            appointment.doctorId = doctorId;
             return this;
         }
 
@@ -102,7 +108,13 @@ public class Appointment implements Serializable {
         return appointmentDate;
     }
 
-    public void setAppointmentDate(Timestamp appointmentDate) {
-        this.appointmentDate = appointmentDate;
+    public void setAppointmentDate(Timestamp appointmentDate) {this.appointmentDate = appointmentDate;}
+
+    public int getDoctorId() {
+        return doctorId;
+    }
+
+    public void setDoctorId(int doctorId) {
+        this.doctorId = doctorId;
     }
 }

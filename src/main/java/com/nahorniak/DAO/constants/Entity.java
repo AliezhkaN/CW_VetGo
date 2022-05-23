@@ -17,6 +17,7 @@ public final class Entity {
     public static final String USER__IS__BLOCKED = "is_blocked";
 
     public static final String APPOINTMENT__USER__ID = "user_id";
+    public static final String APPOINTMENT__DOCTOR__ID = "doctor_id";
     public static final String APPOINTMENT__DATE = "appointment_date";
     public static final String APPOINTMENT__KIND__OF__PET = "kind_of_pet";
     public static final String APPOINTMENT__PET__NAME = "pet_name";

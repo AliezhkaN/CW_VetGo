@@ -27,8 +27,8 @@ public class Mailer {
         boolean flag = false;
 
         String toEmail = user.getEmail();
-        String fromEmail = "xxxx@gmail.com";
-        String password = "xxxxxxx";
+        String fromEmail = "vet.go.ua@gmail.com";
+        String password = "12345Qwerty";
 
         try {
             Properties properties = new Properties();

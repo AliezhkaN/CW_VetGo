@@ -54,7 +54,7 @@
                             <p>Please make an appointment or watch your appointment history</p>
                         </div>
                         <div class="btn-container">
-                            <a data-modal href="" class="button">New Appointment</a>
+                            <a data-modal href="" id="nws" class="button">New Appointment</a>
                             <a href="appointmentHistory" class="button second-button">Appointment History</a>
                         </div>
                     </div>
@@ -63,7 +63,7 @@
                         <div class="appointment__container flex-row">
                             <div class="pet-container">
                                 <div class="img-container">
-                                    <img src="images/spets.jpg" alt="spets">
+                                    <img src="images/spets1.jpg" alt="spets">
                                 </div>
                             </div>
                             <div class="inf-container">
@@ -106,16 +106,21 @@
                                     <div class="t-container">
                                         <ul class="responsive-table">
                                             <li class="table-header">
-                                                <div class="col col-1">Kind of Pet</div>
-                                                <div class="col col-2">Pet Name</div>
+                                                <div class="col col-1">Doctor</div>
+                                                <div class="col col-2">Doctor's number</div>
+                                                <div class="col col-3">Kind of Pet</div>
+                                                <div class="col col-4">Pet Name</div>
                                             </li>
                                             <li class="table-row">
-                                                <div class="col col-1" data-label="Kind of Pet"><c:out value="${appointment.getPetKind()}"/></div>
-                                                <div class="col col-2" data-label="Pet Name"><c:out value="${appointment.getPetName()}"/></div>
+                                                <div class="col col-1" data-label="Doctor"><c:out value="${doctor.getFirstName()} ${doctor.getLastName()}"/></div>
+                                                <div class="col col-2" data-label="Doctor's numbe"><c:out value="${doctor.getPhoneNumber()}"/></div>
+                                                <div class="col col-3" data-label="Kind of Pet"><c:out value="${appointment.getPetKind()}"/></div>
+                                                <div class="col col-4" data-label="Pet Name"><c:out value="${appointment.getPetName()}"/></div>
                                             </li>
                                         </ul>
                                         <form action="appointment" method="post" class="cancel-button-container">
                                             <input type="hidden" name="appointmentId" value="${appointment.getId()}">
+                                            <a data-modal id="upd" href="" class="button">Rearrange</a>
                                             <input type="submit" class="button second-button" value="Cancel">
                                         </form>
 
@@ -165,23 +170,33 @@
     <div class="modal hide" id="newAppointment">
         <div class="modal__dialog">
             <div class="modal__content">
-                <form action="newAppointment" method="post">
+                <form id="form" action="newAppointment" method="post">
                     <div data-close class="modal__close">&times;</div>
                     <div class="modal__title">Make an <span>Appointment</span></div>
                     <div class="flex-ja-center">
                         <div class="login__wrapper">
                             <div style="margin-top: 2vh">
+
                                 <div id="kindLabel" class="hide">
                                     <label  for="kind">Kind of Pet</label>
                                 </div>
                                 <div>
-                                    <input required placeholder="Kind of Pet" id="kind" name="kind" type="text" class="input black">
+                                    <input required placeholder="Kind of Pet" id="kind" name="kind" type="text" class="input black" value="${appointment.getPetKind()}">
                                 </div>
                                 <div id="nameLabel" class="hide">
                                     <label for="name">Pet Name</label>
                                 </div>
                                 <div>
-                                    <input id="name" required placeholder="Pet Name" name="name" type="text" class="input black">
+                                    <input id="name" required placeholder="Pet Name" name="name" type="text" class="input black" value="${appointment.getPetName()}">
+                                </div>
+                                <div class="custom-select">
+                                    <select name="doctor">
+                                        <c:forEach var="doctor" items="${doctors}">
+                                            <option value="${doctor.getId()}">
+                                                <c:out value="${doctor.getFirstName()} ${doctor.getLastName()}"/>
+                                            </option>
+                                        </c:forEach>
+                                    </select>
                                 </div>
                                 <div id="datetimeLabel" class="hide">
                                     <label for="datetime">
@@ -190,10 +205,15 @@
                                 </div>
                                 <div>
                                     <input  id="datetime" name="datetime" type="datetime-local" class="input"/>
-
                                 </div>
+
+                                <br>
                             </div>
-                            <input type="submit" class="button" value="Make an Appointment">
+
+                            <c:if test="${appointment !=null}">
+                                <input type="hidden" name="appointmentId" value="${appointment.getId()}">
+                            </c:if>
+                            <input type="submit" id="i-btn" class="button" value="Make an Appointment">
                             <c:if test="${appointmentError != null}">
                                 <div class="login__modal__message__wrapper mh-7">
                                     <span id="appointmentError"><c:out value="${appointmentError}"/></span>
@@ -209,8 +229,13 @@
     </div>
 
 </div>
+
 <c:if test="${appointmentError != null}">
     <script>
+        <c:if test="${appointment !=null}">
+        document.querySelector('#i-btn').value = 'Rearrange an Appointment';
+        document.querySelector('#form').action = 'appointmentUpdate';
+        </c:if>
         const modal = document.querySelector('#newAppointment');
         modal.classList.add('show');
         modal.classList.remove('hide');
@@ -220,5 +245,6 @@
 <script type="text/javascript">
     <%@include file="/js/profile/appointment/appointment.js" %>
 </script>
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </body>
 </html>

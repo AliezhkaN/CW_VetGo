@@ -4,6 +4,7 @@ import com.nahorniak.DAO.AppointmentDAO;
 import com.nahorniak.DAO.ConnectionPool;
 import com.nahorniak.DAO.entity.Appointment;
 import com.nahorniak.DAO.entity.User;
+import com.nahorniak.util.reCaptcha.VerifyUtils;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -15,6 +16,8 @@ import java.sql.Timestamp;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
+import java.util.function.Predicate;
 
 @WebServlet(name = "newAppointment", value = "/newAppointment")
 public class NewAppointmentServlet extends HttpServlet {
@@ -32,30 +35,52 @@ public class NewAppointmentServlet extends HttpServlet {
         String kind = request.getParameter("kind");
         String name = request.getParameter("name");
         String datetime = request.getParameter("datetime");
+        String doctor = request.getParameter("doctor");
 
-        if(notNull(kind,name,datetime)){
-            try (Connection connection = connectionPool.getConnection()){
-                datetime = datetime.replace("T"," ")+":00";
-                Timestamp timestamp = Timestamp.valueOf(datetime);
-                Appointment.Builder builder = new Appointment.Builder();
-                Appointment appointment = builder
-                        .withUserId(user.getId())
-                        .withPetKind(kind)
-                        .withPetName(name)
-                        .withAppointmentDate(timestamp)
-                        .build();
+        if(notNull(kind,name,datetime,doctor)) {
+                try (Connection connection = connectionPool.getConnection()) {
+                    int doctorId = Integer.parseInt(doctor);
+                    final long time = 1800000;
 
-                appointmentDAO.insertAppointment(appointment,connection);
-                session.setAttribute("message","Appointment successfully has been made");
+                    datetime = datetime.replace("T", " ") + ":00";
+                    Timestamp timestamp = Timestamp.valueOf(datetime);
+                    Appointment.Builder builder = new Appointment.Builder();
+                    Appointment appointment = builder
+                            .withUserId(user.getId())
+                            .withDoctorId(doctorId)
+                            .withPetKind(kind)
+                            .withPetName(name)
+                            .withAppointmentDate(timestamp)
+                            .build();
 
-            } catch (IllegalArgumentException e){
-                session.setAttribute("appointmentError","Please choose date and time correctly");
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+                    List<Appointment> appointments = appointmentDAO.getAll(doctorId, connection);
+
+                    Predicate<Timestamp> predicate = x -> {
+                        Long difference = getDifference(x, timestamp);
+                        return difference >= 0 && difference <= time;
+                    };
+
+                    long count = appointments.stream().map(Appointment::getAppointmentDate).filter(predicate).count();
+                    if (count > 0) {
+                        session.setAttribute("appointmentError", "Chosen date is unavailable, please try to pick date " +
+                                "with 30 min difference");
+                    } else {
+                        appointmentDAO.insertAppointment(appointment, connection);
+                        session.setAttribute("message", "Appointment successfully has been made");
+                    }
+
+                } catch (IllegalArgumentException e) {
+                    session.setAttribute("appointmentError", "Please choose date and time correctly");
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
         }
         response.sendRedirect("appointment");
 
+    }
+
+    private Long getDifference(Timestamp o1,Timestamp o2){
+        return Math.abs(o1.getTime()-o2.getTime());
     }
 
     private boolean notNull(String ... params){

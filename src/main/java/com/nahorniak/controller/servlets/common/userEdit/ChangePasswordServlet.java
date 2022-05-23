@@ -13,8 +13,22 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 
+/**
+ * ChangePasswordServlet -> used for changing password in personal profile
+ *
+ * @author Oleh Nahorniak
+ */
 @WebServlet(name = "changePassword", value = "/changePassword")
 public class ChangePasswordServlet extends HttpServlet {
+
+    /**
+     * doGet method - sendRedirect to error-page
+     *
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.sendError(404);

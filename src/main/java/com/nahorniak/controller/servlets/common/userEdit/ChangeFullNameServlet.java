@@ -11,8 +11,22 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 
+/**
+ * ChangeFullNameServlet -> used for changing full name in personal profile
+ *
+ * @author Oleh Nahorniak
+ */
 @WebServlet(name = "changeFullName", value = "/changeFullName")
 public class ChangeFullNameServlet extends HttpServlet {
+
+    /**
+     * doGet method - sendRedirect to error-page
+     *
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.sendError(404);

@@ -35,6 +35,7 @@ public class SecurityFilter implements Filter {
 
         accessMap.put(Role.ADMIN, asList(config.getInitParameter("admin")));
         accessMap.put(Role.CUSTOMER, asList(config.getInitParameter("client")));
+        accessMap.put(Role.DOCTOR, asList(config.getInitParameter("doctor")));
         log.trace("Access map --> " + accessMap);
 
         commons = asList(config.getInitParameter("common"));

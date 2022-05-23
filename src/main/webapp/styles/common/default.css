@@ -3,6 +3,7 @@
 *{
     margin: 0;
     padding: 0;
+
 }
 
 a {
@@ -50,4 +51,37 @@ html,body{
 [class*="__container"]{
     max-width: 1057px;
     margin: 0px auto;
+}
+
+::-webkit-scrollbar
+{
+
+    width: 10px;
+    background-color: #f9f9f9;
+}
+/*.label::selection,*/
+/*.info-content::selection,*/
+/*h1::selection,*/
+/*a::selection,*/
+/*span::selection,*/
+/*p*/
+::selection{
+    color: white;
+    background: #e8777f;
+}
+
+::-webkit-scrollbar-track {
+
+    border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #f57c84;
+    border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #f54343;
 }
